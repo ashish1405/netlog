@@ -13,7 +13,7 @@ A parser to summarize the nethogs trace mode output. [https://github.com/boopath
 ## Install netlog
 
 Run the setup:
-- `./setup.sh`
+- `sudo ./setup.sh`
 
 ## Usage:
 
