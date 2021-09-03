@@ -1,6 +1,6 @@
 # Netlog
 
-Simple script utilizing nethogs and nethogs-parser to monitor internet usage per process and generate daily/monthly logs
+A collection of simple scripts utilizing nethogs and nethogs-parser to monitor internet usage per process and generate daily/monthly logs
 
 # Nethogs
 
