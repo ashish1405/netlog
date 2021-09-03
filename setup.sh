@@ -32,7 +32,7 @@ read -e -p "Select the day/month: " file
 cd $wdir
 
 printf "\n"
-go run /usr/lib/nethogs-parser/hogs.go -type=pretty /var/log/netlog/$file | grep -v root
+go run /usr/lib/nethogs-parser/hogs.go -type=pretty /var/log/netlog/$file
 EOF
     chmod +x $nlog/netlog
     chmod +x $bpath/netlog-parser
