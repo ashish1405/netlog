@@ -17,7 +17,7 @@ if [ ! -d $nlog ]; then
     cp nethogs-parser/hogs.go $nparse
     cat > $nlog/netlog << EOF
 #!/bin/bash
-nethogs -d 60 -t | tee -a /var/log/netlog/daily /var/log/netlog/month
+nethogs -d 60 -t | tee -a /var/log/netlog/daily /var/log/netlog/monthly
 EOF
     cat > $bpath/netlog-parser << EOF
 #!/bin/bash
@@ -78,7 +78,6 @@ if [ ! -f $cnf ]; then
 /var/log/netlog/daily {
 daily
 rotate 30
-compress
 create
 postrotate
         systemctl restart netlog
