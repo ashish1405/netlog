@@ -21,18 +21,47 @@ nethogs -d 60 -t | tee -a /var/log/netlog/daily /var/log/netlog/monthly
 EOF
     cat > $bpath/netlog-parser << EOF
 #!/bin/bash
-printf "Data is available for:\n"
 
-wdir=$(pwd)
-
-cd /var/log/netlog/
-ls -1
-read -e -p "Select the day/month: " file
-
-cd $wdir
-
+echo -e "\\n"
+printf " _   _      _   _             \\n| \\ | |    | | | |            \\n|  \\| | ___| |_| | ___   __ _ \\n| . ' |/ _ \\ __| |/ _ \\ / _' |\\n| |\\  |  __/ |_| | (_) | (_| |\\n\\_| \\_/\\___|\\__|_|\\___/ \\__, |\\n                         __/ |\\n                        |___/ \\n\\n"
+echo "Data is available for:"
 printf "\n"
-go run /usr/lib/nethogs-parser/hogs.go -type=pretty /var/log/netlog/\$file
+
+files=\$(ls -I "*.gz" /var/log/netlog/)
+
+while true; do
+        i=1
+
+        for j in \$files
+        do
+        echo "\$i. \$j"
+        file[i]=\$j
+        i=\$(( i + 1 ))
+        done
+
+        printf "\n"
+        echo "Enter number or 0 to exit:"
+        read input
+
+        number=\$(printf '%s\\n' "\$input" | tr -dc '[:digit:]')
+
+        if [ "\$number" == "0" ]; then
+                printf "\\n"
+                exit
+        elif [ -z \$number ]; then
+                printf "\\n"
+                echo "No value selected"
+                printf "\\n"
+        elif [ "\$number" -gt "\$i" ]; then
+                printf "\\n"
+                echo "Invalid selection"
+                printf "\\n"
+        else
+                printf "\\n"
+                go run /usr/lib/nethogs-parser/hogs.go -type=pretty /var/log/netlog/\${file[\$input]}
+                break
+        fi
+done
 EOF
     chmod +x $nlog/netlog
     chmod +x $bpath/netlog-parser
