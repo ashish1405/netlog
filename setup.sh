@@ -107,6 +107,7 @@ if [ ! -f $cnf ]; then
 /var/log/netlog/daily {
 daily
 rotate 30
+dateext
 create
 postrotate
         systemctl restart netlog
@@ -117,6 +118,7 @@ endscript
 monthly
 rotate 3
 compress
+dateext
 create
 postrotate
         systemctl restart netlog
