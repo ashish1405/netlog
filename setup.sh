@@ -8,13 +8,13 @@ cnf=/etc/logrotate.d/netlog
 
 # Install dependencies
 apt-get update
-apt-get install nethogs golang-go -y
+apt-get install nethogs -y
 
 # Create files and directories
 if [ ! -d $nlog ]; then
     echo "Setting up netlog..."
     mkdir -p $nparse $nlog $logdir
-    cp nethogs-parser/hogs.go $nparse
+    cp nethogs-parser/hogs $nparse
     cat > $nlog/netlog << EOF
 #!/bin/bash
 nethogs -d 60 -t | tee -a /var/log/netlog/daily /var/log/netlog/monthly
@@ -58,7 +58,7 @@ while true; do
                 printf "\\n"
         else
                 printf "\\n"
-                go run /usr/lib/nethogs-parser/hogs.go -type=pretty /var/log/netlog/\${file[\$input]}
+                /usr/lib/nethogs-parser/hogs -type=pretty /var/log/netlog/\${file[\$input]}
                 break
         fi
 done
