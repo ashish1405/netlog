@@ -16,7 +16,7 @@ if [ ! -d $nlog ]; then
     mkdir -p $nlog $logdir
     cat > $nlog/netlog << EOF
 #!/bin/bash
-nethogs -t | tee -a /var/log/netlog/daily /var/log/netlog/monthly
+nethogs -t ppp0| tee -a /var/log/netlog/daily /var/log/netlog/monthly
 EOF
     
     chmod +x $nlog/netlog
