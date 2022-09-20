@@ -11,7 +11,7 @@ apt-get update
 apt-get install golang-go -y
 
 # Create files and directories
-if [ ! -d $nlog ]; then
+if [ ! -f $bpath/netlog-parser ]; then
     echo "Setting up netlog..."
     mkdir -p $nparse 
     cp nethogs-parser/hogs.go $nparse
@@ -24,7 +24,7 @@ printf " _   _      _   _             \\n| \\ | |    | | | |            \\n|  \\
 echo "Data is available for:"
 printf "\n"
 
-files=\$(ls -I "*.gz" $1)
+files=\$(ls -I "*.gz" \$1)
 
 while true; do
         i=1
