@@ -55,7 +55,7 @@ while true; do
                 printf "\\n"
         else
                 printf "\\n"
-                go run /usr/lib/nethogs-parser/hogs.go -type=pretty $1/\${file[\$input]}
+                go run /usr/lib/nethogs-parser/hogs.go -type=pretty \$1/\${file[\$input]}
                 break
         fi
 done
